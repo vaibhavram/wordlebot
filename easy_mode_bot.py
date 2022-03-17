@@ -1,4 +1,3 @@
-import random 
 import string
 import sys
 import time
@@ -51,7 +50,7 @@ def build_sol_set(candidates, answers, function, x_discount):
     if len(answers) == 1:
         return({answers[0]: 1})
     elif len(answers) == 2:
-        return({random.choice(answers): 1})
+        return({answers[0]: 1})
     for candidate in candidates:
         # print(candidate)
         candidate_outcomes = {}
@@ -60,6 +59,7 @@ def build_sol_set(candidates, answers, function, x_discount):
             candidate_outcomes[result] = candidate_outcomes.get(result, 0) + 1
         if "XXXXX" in candidate_outcomes.keys():
             candidate_outcomes["XXXXX"] = x_discount
+        # print(candidate + ": " + str(candidate_outcomes))
         outcomes[candidate] = function(candidate_outcomes.values())
     return(outcomes)
 
@@ -95,7 +95,7 @@ def get_random_answer(answers):
 
 def run_game(answers, guesses, function):
     # answer = get_random_answer(answers)
-    answer= "round"
+    answer= "joker"
     print("------------------------------")
     print("GAME START")
     print("Answer: " + answer.upper())
@@ -120,7 +120,7 @@ def main():
     answers = [x.strip() for x in a.readlines()]
     a.close()
 
-    run_game(answers, guesses, solution_set_minimizer_avg)
+    run_game(answers, guesses + answers, solution_set_minimizer_avg)
 
 #################
 ### FUNCTIONS ###
