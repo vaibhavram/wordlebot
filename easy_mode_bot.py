@@ -47,9 +47,7 @@ def get_guess_result(word, target):
 
 def build_sol_set(candidates, answers, function, x_discount):
     outcomes = {}
-    if len(answers) == 1:
-        return({answers[0]: 1})
-    elif len(answers) == 2:
+    if len(answers) == 1 or len(answers) == 2:
         return({answers[0]: 1})
     for candidate in candidates:
         # print(candidate)
@@ -95,7 +93,7 @@ def get_random_answer(answers):
 
 def run_game(answers, guesses, function):
     # answer = get_random_answer(answers)
-    answer= "joker"
+    answer= "rover"
     print("------------------------------")
     print("GAME START")
     print("Answer: " + answer.upper())
@@ -130,6 +128,7 @@ def solution_set_minimizer_avg(valid_answers, all_answers, all_guesses, info, no
     if no == 0:
         return("salet")
     sol_set = build_sol_set(all_guesses, valid_answers, lambda x : sum(x) / len(x), 0)
+    # sol_set = build_sol_set(all_guesses, valid_answers, lambda x : max(x), 0)
     return(min(sol_set, key=sol_set.get))
 
 main()
